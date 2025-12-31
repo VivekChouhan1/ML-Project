@@ -1,4 +1,5 @@
-## Aim to read data-source, from-where it located
+## Aim to read data-source, from-where it located and 
+## split in train test spilt and then add in Artifacts folder
 
 import os
 import sys
@@ -7,6 +8,11 @@ from src.logger import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass   ##used to create class variable
+
+
+from src.components.data_tranformation import DataTranformation
+from src.components.data_tranformation import DataTransformationConfig
+
 
 ## any input required in this data Ingestion, will be give through this fn
 @dataclass  ## we can directly define , our class variable by this decorator
@@ -27,7 +33,7 @@ class DataIngestion:
        
             logging.info('Read the dataset as dataframe')
 
-            os.mkdir(os.path.dirname(self.ingestion_config.train_data_path))  ## by this artifect will be created
+            os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)  ## by this artifect will be created
 
             df.to_csv(self.ingestion_config.raw_data_path,index=False,header=True)
 
@@ -50,6 +56,10 @@ class DataIngestion:
 
 
 # # to check
-# if __name__=="__main__":
-#     obj=DataIngestion()
-#     obj.initiate_data_ingestion()
+if __name__=="__main__":
+    obj=DataIngestion()
+    # obj.initiate_data_ingestion()
+    train_data,test_data=obj.initiate_data_ingestion()
+
+    data_transformation=DataTranformation()
+    data_transformation.initiate_data_transformation(train_data,test_data)
