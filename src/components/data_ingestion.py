@@ -49,7 +49,7 @@ class DataIngestion:
 
 
 
-# to check
-if __name__=="__main__":
-    obj=DataIngestion()
-    obj.initiate_data_ingestion()
+# # to check
+# if __name__=="__main__":
+#     obj=DataIngestion()
+#     obj.initiate_data_ingestion()
