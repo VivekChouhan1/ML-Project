@@ -1,3 +1,5 @@
+## use to maintain logs of every step and if error occur
+
 import logging
 import os
 from datetime import datetime
